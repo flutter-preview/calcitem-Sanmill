@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-#import "GeneratedPluginRegistrant.h"
+#import "MacOsPluginRegistrant.h"
 
 @implementation AppDelegate
 

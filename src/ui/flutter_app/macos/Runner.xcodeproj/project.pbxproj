@@ -44,6 +44,7 @@
 		0077EDDA29731162005DB9E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0077EDD729731162005DB9E3 /* main.m */; };
 		0077EDDD29731405005DB9E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0077EDDC29731405005DB9E3 /* AppDelegate.m */; };
 		00E1607A297424FD00E19560 /* PluginRegistrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E16079297424FD00E19560 /* PluginRegistrant.swift */; };
+		00E16084297432F500E19560 /* MacOsPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E16083297432F500E19560 /* MacOsPluginRegistrant.m */; };
 		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		7FD4E0289A9AC04ADF0FDEDA /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F57CE59BF4579643E095056 /* Pods_Runner.framework */; };
@@ -127,6 +128,8 @@
 		0077EDDC29731405005DB9E3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../ios/Runner/AppDelegate.m; sourceTree = "<group>"; };
 		00E16078297424FC00E19560 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		00E16079297424FD00E19560 /* PluginRegistrant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginRegistrant.swift; sourceTree = "<group>"; };
+		00E16082297432F500E19560 /* MacOsPluginRegistrant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOsPluginRegistrant.h; path = ../../ios/Runner/MacOsPluginRegistrant.h; sourceTree = "<group>"; };
+		00E16083297432F500E19560 /* MacOsPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MacOsPluginRegistrant.m; path = ../../ios/Runner/MacOsPluginRegistrant.m; sourceTree = "<group>"; };
 		333000ED22D3DE5D00554162 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedPluginRegistrant.swift; sourceTree = "<group>"; };
 		33CC10ED2044A3C60003C045 /* Mill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +273,8 @@
 		33FAB671232836740065AC1E /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				00E16082297432F500E19560 /* MacOsPluginRegistrant.h */,
+				00E16083297432F500E19560 /* MacOsPluginRegistrant.m */,
 				0077EDD729731162005DB9E3 /* main.m */,
 				0077EDDB29731405005DB9E3 /* AppDelegate.h */,
 				0077EDDC29731405005DB9E3 /* AppDelegate.m */,
@@ -488,6 +493,7 @@
 				0077EDC529730FDB005DB9E3 /* command_channel.cpp in Sources */,
 				0077EDC329730FDB005DB9E3 /* thread.cpp in Sources */,
 				0077EDDA29731162005DB9E3 /* main.m in Sources */,
+				00E16084297432F500E19560 /* MacOsPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
