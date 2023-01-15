@@ -14,28 +14,23 @@
     return self;
 }
 
-- (BOOL)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
     [GeneratedPluginRegistrant registerWithRegistry:self];
 
     [self setupMethodChannel];
-
-    return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (void) setupMethodChannel {
-    FlutterViewController* controller =
-      (FlutterViewController*) self.window.rootViewController;
+    FlutterViewController* controller = (FlutterViewController*) NSApp.mainWindow.contentViewController;
 
     FlutterMethodChannel* channel = [FlutterMethodChannel
-       methodChannelWithName:@"com.calcitem.sanmill/engine"
-       binaryMessenger:controller.binaryMessenger];
+                                     methodChannelWithName:@"com.calcitem.sanmill/engine"
+                                     binaryMessenger:controller.binaryMessenger];
 
     __weak MillEngine* weakEngine = engine;
 
     [channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
-
         if ([@"startup" isEqualToString:call.method]) {
             result(@([weakEngine startup: controller]));
         }

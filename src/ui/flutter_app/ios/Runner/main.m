@@ -1,9 +1,11 @@
-#import <Flutter/Flutter.h>
-#import <UIKit/UIKit.h>
+#import <FlutterMacOS/FlutterMacOS.h>
 #import "AppDelegate.h"
 
 int main(int argc, char* argv[]) {
   @autoreleasepool {
-    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    NSApplication* app = [NSApplication sharedApplication];
+    AppDelegate* delegate = [[AppDelegate alloc] init];
+    [app setDelegate:delegate];
+    [NSApp run];
   }
 }
