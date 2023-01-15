@@ -26,7 +26,7 @@
 
     FlutterMethodChannel* channel = [FlutterMethodChannel
                                      methodChannelWithName:@"com.calcitem.sanmill/engine"
-                                     binaryMessenger:controller.binaryMessenger];
+                                     binaryMessenger:controller.engine.binaryMessenger];
 
     __weak MillEngine* weakEngine = engine;
 
