@@ -43,10 +43,10 @@ public:
     MovePicker &operator=(const MovePicker &) = delete;
     explicit MovePicker(Position &p) noexcept;
 
-    Move next_move();
+    Move next_move(Depth depth);
 
     template <GenType>
-    void score();
+    void score(Depth depth);
 
     [[nodiscard]] ExtMove *begin() const noexcept { return cur; }
 

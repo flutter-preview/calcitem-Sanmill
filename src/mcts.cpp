@@ -127,7 +127,7 @@ Node *expand(Node *node)
     Position *pos = node->position;
 
     MovePicker mp(*pos);
-    mp.next_move(); // Sort moves
+    mp.next_move(DEPTH_NONE); // Sort moves
     const int moveCount = mp.move_count();
 
     // Add child nodes for each sorted legal move

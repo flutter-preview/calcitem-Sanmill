@@ -23,6 +23,10 @@
 using Eval::evaluate;
 using std::string;
 
+#ifdef KILLER_HEURISTIC_ENABLE
+Move killers[MAX_PLY][2] {{MOVE_NONE}};
+#endif // KILLER_HEURISTIC_ENABLE
+
 Value MTDF(Position *pos, Sanmill::Stack<Position> &ss, Value firstguess,
            Depth depth, Depth originDepth, Move &bestMove);
 
@@ -156,6 +160,10 @@ int Thread::search()
 #endif
 #endif
 
+#ifdef KILLER_HEURISTIC_ENABLE
+            std::memset(killers, MOVE_NONE, sizeof(killers));
+#endif // KILLER_HEURISTIC_ENABLE
+
             if (gameOptions.getAlgorithm() == 2 /* MTD(f) */) {
                 // debugPrintf("Algorithm: MTD(f).\n");
                 value = MTDF(rootPos, ss, value, i, i, bestMove);
@@ -188,6 +196,10 @@ int Thread::search()
     TranspositionTable::clear();
 #endif
 #endif
+
+#ifdef KILLER_HEURISTIC_ENABLE
+    std::memset(killers, MOVE_NONE, sizeof(killers));
+#endif // KILLER_HEURISTIC_ENABLE
 
     if (gameOptions.getAlgorithm() != 2 /* !MTD(f) */
         && gameOptions.getIDSEnabled()) {
@@ -350,7 +362,7 @@ Value qsearch(Position *pos, Sanmill::Stack<Position> &ss, Depth depth,
     // Initialize a MovePicker object for the current position, and prepare
     // to search the moves.
     MovePicker mp(*pos);
-    const Move nextMove = mp.next_move();
+    const Move nextMove = mp.next_move(depth);
     const int moveCount = mp.move_count();
 
 #ifndef NNUE_GENERATE_TRAINING_DATA
@@ -474,6 +486,15 @@ Value qsearch(Position *pos, Sanmill::Stack<Position> &ss, Depth depth,
                     // Update alpha! Always alpha < beta
                     alpha = value;
                 } else {
+#ifdef KILLER_HEURISTIC_ENABLE
+                    // Update killers
+                    if (type_of(move) != MOVETYPE_REMOVE &&
+                        killers[depth][0] != move) {
+                        killers[depth][1] = killers[depth][0];
+                        killers[depth][0] = move;
+                    }
+#endif // KILLER_HEURISTIC_ENABLE
+
                     assert(value >= beta); // Fail high
                     break;                 // Fail high
                 }

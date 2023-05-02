@@ -208,6 +208,11 @@ enum Value : int8_t {
 enum Rating : int8_t {
     RATING_ZERO = 0,
 
+#ifdef KILLER_HEURISTIC_ENABLE
+    RATING_KILLER_0 = 5,
+    RATING_KILLER_1 = 4,
+#endif // KILLER_HEURISTIC_ENABLE
+
     RATING_BLOCK_ONE_MILL = 10,
     RATING_ONE_MILL = 11,
 
@@ -281,7 +286,7 @@ enum Piece : uint8_t {
 
 using Depth = int8_t;
 
-enum : int { DEPTH_NONE = 0, DEPTH_OFFSET = DEPTH_NONE };
+enum : int { DEPTH_NONE = -6, DEPTH_OFFSET = -7 };
 
 enum Square : int {
     SQ_0 = 0,

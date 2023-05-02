@@ -17,6 +17,10 @@
 #include "movepick.h"
 #include "option.h"
 
+#ifdef KILLER_HEURISTIC_ENABLE
+extern Move killers[MAX_PLY][2];
+#endif // KILLER_HEURISTIC_ENABLE
+
 // partial_insertion_sort() sorts moves in descending order up to and including
 // a given limit. The order of moves smaller than the limit is left unspecified.
 void partial_insertion_sort(ExtMove *begin, const ExtMove *end, int limit)
@@ -41,7 +45,7 @@ MovePicker::MovePicker(Position &p) noexcept
 /// MovePicker::score() assigns a numerical value to each move in a list, used
 /// for sorting.
 template <GenType Type>
-void MovePicker::score()
+void MovePicker::score(Depth depth)
 {
     int theirMillsCount;
     int ourPieceCount = 0;
@@ -103,6 +107,16 @@ void MovePicker::score()
                 Position::is_star_square(static_cast<Square>(m))) {
                 cur->value += RATING_STAR_SQUARE;
             }
+
+#ifdef KILLER_HEURISTIC_ENABLE
+            if (depth != DEPTH_NONE) {
+                if (m == killers[depth][0]) {
+                    cur->value += RATING_KILLER_0;
+                } else if (m == killers[depth][1]) {
+                    cur->value += RATING_KILLER_1;
+                }
+            }
+#endif // KILLER_HEURISTIC_ENABLE
         } else {
             // Remove
             ourPieceCount = theirPiecesCount = bannedCount = emptyCount = 0;
@@ -150,12 +164,12 @@ void MovePicker::score()
 /// class. It returns a new pseudo legal move every time it is called until
 /// there are no more moves left, picking the move with the highest score from a
 /// list of generated moves.
-Move MovePicker::next_move()
+Move MovePicker::next_move(Depth depth)
 {
     endMoves = generate<LEGAL>(pos, moves);
     moveCount = static_cast<int>(endMoves - moves);
 
-    score<LEGAL>();
+    score<LEGAL>(depth);
     partial_insertion_sort(moves, endMoves, INT_MIN);
 
     return *moves;

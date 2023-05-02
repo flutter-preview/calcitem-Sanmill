@@ -36,6 +36,10 @@
 
 using std::cout;
 
+#ifdef KILLER_HEURISTIC_ENABLE
+extern Move killers[MAX_PLY][2];
+#endif // KILLER_HEURISTIC_ENABLE
+
 ThreadPool Threads; // Global object
 
 /// Thread constructor launches the thread and waits until it goes to sleep
@@ -193,6 +197,10 @@ void Thread::setAi(Position *p)
     TranspositionTable::clear();
 #endif
 #endif
+
+#ifdef KILLER_HEURISTIC_ENABLE
+    std::memset(killers, MOVE_NONE, sizeof(killers));
+#endif // KILLER_HEURISTIC_ENABLE
 }
 
 void Thread::setAi(Position *p, int time)
