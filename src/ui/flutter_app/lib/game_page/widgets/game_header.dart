@@ -70,13 +70,38 @@ class _GameHeaderState extends State<GameHeader> {
 
   @override
   Widget build(BuildContext context) {
-    final Container divider = Container(
+    int value = GameController().value == null ? 0 : int.parse(GameController().value!);
+    value *= 2;
+    if (value > 90) {
+      value = 90;
+    }
+    if (value < -90) {
+      value = -90;
+    }
+    final num dividerWhiteLength = 90 + value;
+    final num dividerBlackLength = 90 - value;
+
+    final Widget divider = Container(
       height: 2,
       width: 180,
       margin: const EdgeInsets.only(bottom: AppTheme.boardMargin),
       decoration: BoxDecoration(
-        color: DB().colorSettings.boardBackgroundColor,
         borderRadius: BorderRadius.circular(2),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: 2,
+            width: dividerWhiteLength.toDouble(),
+            color: DB().colorSettings.whitePieceColor,
+          ),
+          Container(
+            height: 2,
+            width: dividerBlackLength.toDouble(),
+            color: DB().colorSettings.blackPieceColor,
+          ),
+        ],
       ),
     );
 
