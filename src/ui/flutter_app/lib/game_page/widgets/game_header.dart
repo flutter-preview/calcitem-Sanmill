@@ -70,7 +70,8 @@ class _GameHeaderState extends State<GameHeader> {
 
   @override
   Widget build(BuildContext context) {
-    int value = GameController().value == null ? 0 : int.parse(GameController().value!);
+    int value =
+        GameController().value == null ? 0 : int.parse(GameController().value!);
     value *= 2;
     if (value > 90) {
       value = 90;

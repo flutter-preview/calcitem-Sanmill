@@ -20,7 +20,7 @@ class Engine {
   Engine();
 
   static const MethodChannel _platform =
-  MethodChannel("com.calcitem.sanmill/engine");
+      MethodChannel("com.calcitem.sanmill/engine");
 
   bool get _isPlatformChannelAvailable => !kIsWeb;
 
@@ -119,7 +119,7 @@ class Engine {
     }
 
     final String? response =
-    await _waitResponse(<String>["bestmove", "nobestmove"]);
+        await _waitResponse(<String>["bestmove", "nobestmove"]);
 
     if (response == null) {
       // ignore: only_throw_errors
@@ -152,10 +152,10 @@ class Engine {
   }
 
   Future<String?> _waitResponse(
-      List<String> prefixes, {
-        int sleep = 100,
-        int times = 0,
-      }) async {
+    List<String> prefixes, {
+    int sleep = 100,
+    int times = 0,
+  }) async {
     final GeneralSettings settings = DB().generalSettings;
 
     int timeLimit = EnvironmentConfig.devMode ? 100 : 6000;
@@ -193,7 +193,7 @@ class Engine {
 
     return Future<String?>.delayed(
       Duration(milliseconds: sleep),
-          () => _waitResponse(prefixes, times: times + 1),
+      () => _waitResponse(prefixes, times: times + 1),
     );
   }
 
